@@ -8,9 +8,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#ffbe33",
+        secondary: "#222831",
       },
+      fontFamily: {
+        dancing: ["Dancing Script", "cursive"],
+      }
     },
   },
   plugins: [],
