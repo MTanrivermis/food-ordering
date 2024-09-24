@@ -1,12 +1,14 @@
-import Carousel from '@/components/Carousel'
-import React from 'react'
+import Campaigns from "@/components/Campaigns";
+import Carousel from "@/components/Carousel";
+import React from "react";
 
 const Index = () => {
   return (
-    <div className='relative'>
-      <Carousel/>
+    <div className="">
+      <Carousel />
+      <Campaigns />
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
