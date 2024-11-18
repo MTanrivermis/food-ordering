@@ -38,3 +38,25 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+----------------------------------------------------------------
+
+DESCRIPTION OF THE HANDDLESIZE FUNCTION ON THE PRODUCT PAGE:
+
+Example Workflow
+For example:
+
+The current size is small, and the price is 10.
+The user selects the medium size, and the price should be updated to 20.
+When the function runs:
+
+difference = prices[1] - prices[0], so difference = 20 - 10, which results in 10.
+size is updated to the new index, 1.
+changePrice(10) is called, which increases price by 10, making the new total price 20.
+This function ensures that the total price is updated correctly whenever a different size is selected.
+
+
+
+
+
+

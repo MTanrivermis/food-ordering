@@ -1,7 +1,7 @@
-import { reservationSchema } from "@/schema/reservation";
 import Input from "./form/Input";
 import Title from "./ui/Title";
 import { useFormik } from "formik";
+import { reservationSchema } from "@/schema/reservation";
 
 const Reservation = () => {
   const onSubmit = async (values, actions) => {
@@ -21,8 +21,6 @@ const Reservation = () => {
       onSubmit,
       validationSchema: reservationSchema,
     });
-
-  console.log(values);
 
   const inputs = [
     {
