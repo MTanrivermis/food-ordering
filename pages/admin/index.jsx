@@ -3,11 +3,27 @@ import { adminSchema } from "@/schema/admin";
 import Input from "@/components/form/Input";
 import Title from "@/components/ui/Title";
 import Link from "next/link";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const Login = () => {
+  const { push } = useRouter();
+
   const onSubmit = async (values, actions) => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    actions.resetForm();
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/admin`,
+        values
+      );
+      if (res.status === 200) {
+        console.log(res.data);
+        actions.resetForm();
+        toast.success("Admin Login Successfully");
+        push("/admin/profile");
+      }
+    } catch (err) {}
+    console.log(err);
   };
 
   const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
@@ -69,6 +85,21 @@ const Login = () => {
       </form>
     </div>
   );
+};
+
+export const getServerSideProps = (ctx) => {
+  const myCookie = ctx.req?.cookies || "";
+  if (myCookie.token === process.env.ADMIN_TOKEN) {
+    return {
+      redirect: {
+        destination: "/admin/profile",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default Login;
