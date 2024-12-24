@@ -1,15 +1,14 @@
 import Account from "@/components/profile/Account";
 import Order from "@/components/profile/Order";
 import Password from "@/components/profile/Password";
-import { signOut, useSession } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 const Profile = () => {
   const [tabs, setTabs] = useState(0);
   const { push } = useRouter();
-  const { data: session } = useSession();
 
   const handleSignOut = () => {
     if (confirm("Are you sure you want to sign out?")) {
@@ -17,12 +16,6 @@ const Profile = () => {
       push("/auth/login");
     }
   };
-
-  useEffect(() => {
-    if (!session) {
-      push("/auth/login");
-    }
-  }, [session, push]);
 
   return (
     <div className="flex px-10 min-h-[calc(100vh_-_433px)] lg:flex-row flex-col lg:mb-0 mb-10">
@@ -80,5 +73,22 @@ const Profile = () => {
     </div>
   );
 };
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/auth/login",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default Profile;
