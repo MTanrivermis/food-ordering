@@ -1,12 +1,14 @@
 import Account from "@/components/profile/Account";
 import Order from "@/components/profile/Order";
 import Password from "@/components/profile/Password";
-import { getSession, signOut, useSession } from "next-auth/react";
+import axios from "axios";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Profile = () => {
+const Profile = ({ user }) => {
+  const { data: session } = useSession();
   const [tabs, setTabs] = useState(0);
   const { push } = useRouter();
 
@@ -17,18 +19,24 @@ const Profile = () => {
     }
   };
 
+  useEffect(() => {
+    if (!session) {
+      push("/auth/login");
+    }
+  }, [session, push]);
+
   return (
     <div className="flex px-10 min-h-[calc(100vh_-_433px)] lg:flex-row flex-col lg:mb-0 mb-10">
       <div className="lg:w-80 w-100 flex-shrink-0">
         <div className="relative flex flex-col items-center px-10 py-5 border border-b-0 ">
           <Image
-            src="/images/client2.jpg"
+            src={user.image ? user.image : "/images/client2.jpg"}
             alt=""
             width={100}
             height={100}
             className="rounded-full"
           />
-          <b className="text-2xl mt-1">John Doe</b>
+          <b className="text-2xl mt-1">{user.fullName}</b>
         </div>
         <ul className="text-center font-semibold">
           <li
@@ -67,27 +75,22 @@ const Profile = () => {
           </li>
         </ul>
       </div>
-      {tabs === 0 && <Account />}
-      {tabs === 1 && <Password />}
+      {tabs === 0 && <Account user={user} />}
+      {tabs === 1 && <Password user={user} />}
       {tabs === 2 && <Order />}
     </div>
   );
 };
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
+export async function getServerSideProps({ req, params }) {
+  const user = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_URL}/users/${params.id}`
+  );
 
   return {
-    props: {},
+    props: {
+      user: user ? user.data : null,
+    },
   };
 }
 
