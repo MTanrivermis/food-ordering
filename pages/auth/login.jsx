@@ -20,7 +20,6 @@ const Login = () => {
     try {
       const res = await signIn("credentials", options);
       actions.resetForm();
-      toast.success("Login successfully");
     } catch (err) {
       console.log(err);
     }
