@@ -36,7 +36,7 @@ const Profile = ({ user }) => {
             height={100}
             className="rounded-full"
           />
-          <b className="text-2xl mt-1">{user.fullName}</b>
+          <b className="text-2xl text-center mt-1">{user.fullName}</b>
         </div>
         <ul className="text-center font-semibold">
           <li

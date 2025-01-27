@@ -66,7 +66,7 @@ const Products = () => {
             {products.length > 0 &&
               products.map((product) => (
                 <tr
-                  key={product._id}
+                  key={product.id}
                   className="bg-secondary border-gray-700 hover:bg-primary transition-all"
                 >
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
