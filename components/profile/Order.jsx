@@ -38,6 +38,7 @@ const Order = () => {
     getUsers();
   }, [session]);
 
+  console.log(orders);
   return (
     <div className="lg:p-8 flex-1 lg:mt-0 mt-5">
       <Title addClass="text-[40px]">Orders</Title>
@@ -66,22 +67,22 @@ const Order = () => {
             {orders.map((order) => (
               <tr
                 className="bg-secondary border-gray-700 hover:bg-primary transition-all"
-                key={order._id}
+                key={order?._id}
               >
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
-                  <span>63107...</span>
+                  <span>{order?._id}</span>
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                  <span>İzmir</span>
+                  <span>{order?.address}</span>
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                  01-09-2024
+                  {order?.date}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                  $18
+                  ${order?.total}
                 </td>
                 <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                  preparing
+                  {order?.method}
                 </td>
               </tr>
             ))}
