@@ -66,25 +66,25 @@ const Products = () => {
             {products.length > 0 &&
               products.map((product) => (
                 <tr
-                  key={product.id}
+                  key={product._id}
                   className="bg-secondary border-gray-700 hover:bg-primary transition-all"
                 >
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white flex items-center gap-x-1 justify-center">
                     <Image
-                      src={product.img}
-                      alt={product.title}
+                      src={product?.img}
+                      alt={product?.title}
                       width={50}
                       height={50}
                     />
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                    <span>{product._id.substring(0, 10)}...</span>
+                    <span>{product?._id.substring(0, 10)}...</span>
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                    {product.title}
+                    {product?.title}
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
-                    ${product.prices[0]}
+                    ${product?.prices[0]}
                   </td>
                   <td className="py-4 px-6 font-medium whitespace-nowrap hover:text-white ">
                     <button
