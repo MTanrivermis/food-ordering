@@ -245,7 +245,7 @@ const AddProduct = ({ setIsProductModal }) => {
               className="absolute  top-4 right-4"
               onClick={() => setIsProductModal(false)}
             >
-              <GiCancel size={25} className=" transition-all" />
+              <GiCancel size={20} className="transition-all" />
             </button>
           </div>
         </div>

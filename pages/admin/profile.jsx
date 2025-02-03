@@ -44,16 +44,25 @@ const Profile = () => {
         </div>
         <ul className="text-center font-semibold">
           <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
+            className={`flex justify-between items-center space-x-2 border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
               tabs === 0 && "bg-primary text-white"
             }`}
             onClick={() => setTabs(0)}
           >
-            <i className="fa fa-cutlery"></i>
-            <button className="ml-1">Products</button>
+            <div className="ml-12 flex-1 flex justify-center">
+              <i className="fa fa-cutlery"></i>
+              <button className="ml-1">Products</button>
+            </div>
+            <button
+              className=" ml-11 btn-primary !bg-green-500 !w-8 !h-8 !p-0  bottom-8 right-12 text-2xl"
+              onClick={() => setIsProductModal(true)}
+            >
+              +
+            </button>
           </li>
+
           <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
+            className={`border border-t-0 w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
               tabs === 1 && "bg-primary text-white"
             }`}
             onClick={() => setTabs(1)}
@@ -62,7 +71,7 @@ const Profile = () => {
             <button className="ml-1">Orders</button>
           </li>
           <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
+            className={`border border-t-0 w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
               tabs === 2 && "bg-primary text-white"
             }`}
             onClick={() => setTabs(2)}
@@ -71,7 +80,7 @@ const Profile = () => {
             <button className="ml-1">Categories</button>
           </li>
           <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
+            className={`border border-t-0 w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
               tabs === 3 && "bg-primary text-white"
             }`}
             onClick={() => setTabs(3)}
@@ -80,7 +89,7 @@ const Profile = () => {
             <button className="ml-1">Footer</button>
           </li>
           <li
-            className={`border w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
+            className={`border border-t-0 w-full p-3 cursor-pointer hover:bg-primary hover:text-white transition-all ${
               tabs === 4 && "bg-primary text-white"
             }`}
             onClick={closeAdminAccount}
@@ -95,12 +104,6 @@ const Profile = () => {
       {tabs === 2 && <Category />}
       {tabs === 3 && <Footer />}
       {isProductModal && <AddProduct setIsProductModal={setIsProductModal} />}
-      <button
-        className="btn-primary !w-12 !h-12 !p-0 absolute bottom-8 right-12 text-2xl"
-        onClick={() => setIsProductModal(true)}
-      >
-        +
-      </button>
     </div>
   );
 };
