@@ -1,9 +1,9 @@
-import { useFormik } from "formik";
-import { registerSchema } from "@/schema/register";
-import Input from "@/components/form/Input";
-import Title from "@/components/ui/Title";
-import Link from "next/link";
 import axios from "axios";
+import { useFormik } from "formik";
+import Link from "next/link";
+import Input from "../../components/form/Input";
+import Title from "../../components/ui/Title";
+import { registerSchema } from "../../schema/register";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
@@ -15,7 +15,7 @@ const Register = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/users/register`,
         values
       );
-      if (res.status === 201) {
+      if (res.status === 200) {
         toast.success("User created successfully");
         push("/auth/login");
       }
@@ -25,8 +25,7 @@ const Register = () => {
     }
     actions.resetForm();
   };
-
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+  const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: {
         fullName: "",
@@ -70,7 +69,7 @@ const Register = () => {
       id: 4,
       name: "confirmPassword",
       type: "password",
-      placeholder: "Confirm Password",
+      placeholder: "Your Password Again",
       value: values.confirmPassword,
       errorMessage: errors.confirmPassword,
       touched: touched.confirmPassword,
@@ -100,7 +99,7 @@ const Register = () => {
           </button>
           <Link href="/auth/login">
             <span className="text-sm underline cursor-pointer text-secondary">
-              Do you have an account?
+              Do you have a account?
             </span>
           </Link>
         </div>

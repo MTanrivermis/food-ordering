@@ -1,13 +1,12 @@
 import { useFormik } from "formik";
-import { loginSchema } from "@/schema/login";
-import Input from "@/components/form/Input";
-import Title from "@/components/ui/Title";
 import Link from "next/link";
-import { useSession, signIn, getSession } from "next-auth/react";
+import Input from "../../components/form/Input";
+import Title from "../../components/ui/Title";
+import { loginSchema } from "../../schema/login";
+import { getSession, signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
 const Login = () => {
   const { data: session } = useSession();
@@ -40,7 +39,7 @@ const Login = () => {
     getUser();
   }, [session, push, currentUser]);
 
-  const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
+  const { values, errors, touched, handleSubmit, handleChange, handleBlur } =
     useFormik({
       initialValues: {
         email: "",
@@ -97,12 +96,12 @@ const Login = () => {
             type="button"
             onClick={() => signIn("github")}
           >
-            <i className="fa fa-github mr-2"></i>
+            <i className="fa fa-github mr-2 text-lg"></i>
             GITHUB
           </button>
           <Link href="/auth/register">
             <span className="text-sm underline cursor-pointer text-secondary">
-              Do you no have an account
+              Do you no have a account?
             </span>
           </Link>
         </div>
@@ -116,7 +115,6 @@ export async function getServerSideProps({ req }) {
 
   const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users`);
   const user = res.data?.find((user) => user.email === session?.user.email);
-
   if (session && user) {
     return {
       redirect: {
