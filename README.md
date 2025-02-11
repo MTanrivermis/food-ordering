@@ -55,6 +55,8 @@ size is updated to the new index, 1.
 changePrice(10) is called, which increases price by 10, making the new total price 20.
 This function ensures that the total price is updated correctly whenever a different size is selected.
 
+***Sometimes my project encounters issues due to Vercel, resulting in a 504 status code error.***
+
 
 
 
